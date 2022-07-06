@@ -44,6 +44,10 @@ public class HomePage {
 	WebElement customers;
 	@FindBy (xpath="//span[contains(.,'Suppliers')]")
 	WebElement suppliers;
+	@FindBy (xpath="//span[contains(.,'Customers')]")
+	 WebElement navigateToCustomerPage;
+	
+	
 	
 	public void selectWaiters()
 	{
@@ -56,10 +60,16 @@ public class HomePage {
 		people.click();
 		customers.click();
 	}
+	
 	public void selectSuppliers()
 	{
 		people.click();
 		suppliers.click();
+	}
+	
+	public void selectSales()
+	{
+		sales.click();
 	}
 	
 	public Boolean  isWaitersDisplayed() throws Exception
@@ -122,4 +132,17 @@ public class HomePage {
 		selectWaiters();
 		return new WaiterPage(driver);
 	}
+	public SalesPage salesLogin()
+	{
+		selectSales();
+		return new SalesPage(driver);
+	}
+	public CustomerPage selectCustomerPage()
+    {
+    	navigateToCustomerPage.click();
+    	return new CustomerPage(driver);
+    }
+
+
+	
 }

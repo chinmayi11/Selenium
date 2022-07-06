@@ -39,7 +39,7 @@ public class UtilityActionHelper {
 	/**
 	 * method to return table row count
 	 */
-	public int getTableRowCount(WebDriver driver, List <WebElement> element) throws Exception {
+	public int getTableRowCount(List <WebElement> element) throws Exception {
 		try {
 			return element.size();
 		}catch(Exception e) {
@@ -56,17 +56,7 @@ public class UtilityActionHelper {
 			throw new Exception("getTableColumnCount (UtilityActionHelper) : "+e.getMessage());
 		}
 	}
-	/**
-	 * method to get table content based on row and column index
-	 * @throws Exception 
-	 */
-	public String getTableContentOnRowAndColumn(WebDriver driver, String xpath) throws Exception {
-		try {
-			return driver.findElement(By.xpath(xpath)).getText();
-		}catch (Exception e) {
-			throw new Exception("getTableContentOnRowAndColumn (UtilityActionHelper) : "+e.getMessage());
-		}
-	}
+	
 	/**
 	 * method to select drop down by visible text
 	 * @throws Exception 
@@ -138,6 +128,11 @@ public class UtilityActionHelper {
 		}catch (Exception e) {
 			throw new Exception("dragToXandY (UtilityActionHelper) : "+e.getMessage());
 		}
+	}
+	
+	public String getColumnContent(WebDriver driver, String element)
+	{
+		return driver.findElement(By.xpath(element)).getText();
 	}
 
 

@@ -32,6 +32,30 @@ public class BaseTest {
 		
 	}
 	
+	public WebDriver launchFirefoxBrowser()
+	{
+		try {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\chinm\\OneDrive\\Desktop\\driver\\geckodriver.exe");
+		driver=new FirefoxDriver();
+		driver.manage().window().maximize();
+		WebActionHelper wb=new WebActionHelper();
+		wb.launchUrl(driver,"chrome");
+		if(driver==null)
+		{
+			System.out.println("***************launch browser");
+		}
+		
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
+		return driver;
+		
+	}
+	
+	
 	public WebDriver launchBrowser(String browserName)
 	{
 		switch(browserName)
@@ -40,7 +64,7 @@ public class BaseTest {
 			launchChromeBrowser();
 			break;
 		case "firefox":
-			// launchFirefoxBrowser();
+			launchFirefoxBrowser();
 			break;
 
 		default:

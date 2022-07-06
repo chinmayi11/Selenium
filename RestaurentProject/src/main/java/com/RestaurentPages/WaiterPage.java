@@ -1,5 +1,8 @@
 package com.RestaurentPages;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,11 +11,13 @@ import org.testng.Assert;
 
 import com.ActionHelper.SendKeysActionHelper;
 import com.ActionHelper.UtilityActionHelper;
+import com.ActionHelper.clickActionHelper;
 
 public class WaiterPage {
 
 	public WaiterPage(WebDriver driver)
 	{
+		
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 
@@ -20,20 +25,21 @@ public class WaiterPage {
 	WebDriver driver;
 	SendKeysActionHelper send;
 	UtilityActionHelper util;
+	clickActionHelper clicker;
 	
 	@FindBy (xpath="//th[contains(.,'Waiter Name')]")
-	WebElement waiterName;
+	WebElement waiterTableName;
 	
 	@FindBy (xpath="//th[contains(.,'Phone')]")
-	WebElement waiterPhone;
+	WebElement waiterTablePhone;
 	@FindBy (xpath="//th[contains(.,'Email')]")
-	WebElement waiterEmail;
+	WebElement waiterTableEmail;
 	@FindBy (xpath="//th[contains(.,'Store')]")
-	WebElement waiterStore;
+	WebElement waiterTableStore;
 	@FindBy (xpath="//th[contains(.,'Ceated At')]")
-	WebElement waiterCreatedAt;
-	@FindBy (xpath="Action")
-	WebElement waiterAction;
+	WebElement waiterTableCreatedAt;
+	@FindBy (xpath="//th[contains(.,'Action')]")
+	WebElement waiterTableAction;
 	@FindBy (xpath="//button[contains(.,'Add Waiter')]")
 	WebElement addWaiterButton;
 	@FindBy (xpath="//input[@type='search']")
@@ -54,37 +60,59 @@ public class WaiterPage {
 	WebElement submitButton;
 	@FindBy (xpath="//div[@id='Table_info']")
 	WebElement show;
+	@FindBy (xpath="(//i[@class='fa fa-times'])[1]")
+	WebElement deleteButton;
+	@FindBy (xpath="//a[contains(.,'Yes, delete it!')]")
+	WebElement deleteConfirmationButton;
+	@FindBy (xpath="//a[@class='btn btn-default']//i[@class='fa fa-pencil'][1]")
+	WebElement editButton;
+	/*@FindBy(xpath="//table[@id='Table']/tbody/tr")
+	List<WebElement> rowElements;
+	@FindBy(xpath="//table[@id='Table']/tbody/tr/td")
+	List<WebElement> columnElements;
+	int rowCount=rowElements.size();
+	int columnCount=columnElements.size();*/
 	
+	 @FindBy (xpath="//span[contains(.,'Customers')]")
+	 WebElement navigateToCustomerPage;
 	
 	//Method to search users
-	public void searchUsers(String name)
+	public void searchUsers(String name) throws Exception
 	{
+		
 		send=new SendKeysActionHelper();
 		send.clearAndsendkeys(driver, searchBar, name);
+		
+		
 		
 	}
 	//Method to add waiters
 	
-	public void addWaiters()
+	public void clickonAddWaiters()
 	{
-		addWaiterButton.click();
+		//addWaiterButton.click();
+		clicker = new clickActionHelper();
+		clicker.click(driver, addWaiterButton);
 	}
 
 	public void typeWaiterName(String nameOfWaiter)
 	{
-		//send.clearAndsendkeys(driver, inWaiterName, nameOfWaiter);
-		inWaiterName.sendKeys(nameOfWaiter);
+		send.clearAndsendkeys(driver, inWaiterName, nameOfWaiter);
+		//inWaiterName.clear();
+		//inWaiterName.sendKeys(nameOfWaiter);
 		
 	}
 	public void typePhone(String phn)
 	{
-		//send.clearAndsendkeys(driver, inWaiterPhone, phn);
-		inWaiterPhone.sendKeys(phn);
+		send.clearAndsendkeys(driver, inWaiterPhone, phn);
+		//inWaiterPhone.clear();
+		//inWaiterPhone.sendKeys(phn);
 	}
 	public void typeEmail(String mail)
 	{
-		//send.clearAndsendkeys(driver, inWaiterEmail, mail);
-		inWaiterEmail.sendKeys(mail);
+		send.clearAndsendkeys(driver, inWaiterEmail, mail);
+		//inWaiterEmail.clear();
+		//inWaiterEmail.sendKeys(mail);
 	}
     public void selectStoreID(String storeId) throws Exception
     {
@@ -93,34 +121,53 @@ public class WaiterPage {
     }
     public void clickSubmitButton()
     {
-    	submitButton.click();
+    	//submitButton.click();
+    	clicker.click(driver, submitButton);
     }
 	  
+    /** Methods for delete**/
+    
+    public void clickDeleteButton()
+    {
+    	//deleteButton.click();
+    	//deleteConfirmationButton.click();
+    	clicker.click(driver, deleteButton);
+    	clicker.click(driver, deleteConfirmationButton);
+    }
+    
+    /**Method for edit**/
+    
+    public void clickEditButton()
+    {
+    	editButton.click();
+    }
+    
+   
 	/**Methods for validation of elements**/
     
 	public Boolean isWaiterNameDisplayed()
 	{
-		return waiterName.isDisplayed();
+		return waiterTableName.isDisplayed();
 	}
 	public Boolean isWaiterPhoneDisplayed()
 	{
-		return waiterPhone.isDisplayed();
+		return waiterTablePhone.isDisplayed();
 	}
 	public Boolean isWaiterEmailDisplayed()
 	{
-		return waiterEmail.isDisplayed();
+		return waiterTableEmail.isDisplayed();
 	}
 	public Boolean isWaiterStoreDisplayed()
 	{
-		return waiterStore.isDisplayed();
+		return waiterTableStore.isDisplayed();
 	}
 	public Boolean isWaiterCreatedAtDisplayed()
 	{
-		return waiterCreatedAt.isDisplayed();
+		return waiterTableCreatedAt.isDisplayed();
 	}
 	public Boolean isWaiterActionDisplayed()
 	{
-		return waiterAction.isDisplayed();
+		return waiterTableAction.isDisplayed();
 	}
 	public Boolean isAddWaiterButtonDisplayed()
 	{
@@ -154,6 +201,13 @@ public class WaiterPage {
 	{
 		return submitButton.isEnabled();
 	}
+	
+	
+	public CustomerPage selectCustomerPage()
+    {
+    	navigateToCustomerPage.click();
+    	return new CustomerPage(driver);
+    }
 	
 
 

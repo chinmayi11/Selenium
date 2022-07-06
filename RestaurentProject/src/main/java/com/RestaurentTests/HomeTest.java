@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.DataHandlers.ExcelUtility;
 import com.RestaurentPages.HomePage;
 import com.RestaurentPages.LoginPage;
 
@@ -16,7 +17,7 @@ public class HomeTest extends BaseTest{
 	HomePage hp;
 	WebDriver driver;
 	LoginPage lp;
-	
+	ExcelUtility ex;
 	public HomeTest()
 	{
 		super();
@@ -88,6 +89,14 @@ public class HomeTest extends BaseTest{
 
 	}
 	
+	@Test()
+	public void validateExcel() throws IOException {
+		ex=new ExcelUtility();
+		ex.setExcelFileSheet("Waiter");
+		String name=ex.getCellData(1, 0);
+		System.out.println("*****data from excel = "+name);
+		
+	}
 
 	
 
