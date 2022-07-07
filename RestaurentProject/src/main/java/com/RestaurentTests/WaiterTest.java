@@ -167,12 +167,12 @@ public class WaiterTest extends BaseTest{
 
 	}
 	
-	@Test
+	/*@Test
 	public void excelRead() throws IOException
 	{
 		ExcelUtility excelda=new ExcelUtility();
 		excelda.setExcelFileSheet("Waiter");
 		System.out.println("********"+excelda.getCellData(1, 0));
-	}
+	}*/
 	
 }
