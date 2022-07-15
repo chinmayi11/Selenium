@@ -27,7 +27,8 @@ public class ExcelUtility {
 	
 	public void setExcelFileSheet(String sheetName) throws IOException
 	{
-		excelPath=currentDirExcel+"/src/main/resources/";
+		System.out.println("************"+currentDirExcel);
+		excelPath=currentDirExcel+"/src/main/resources/"+excelFileName;
 		
 		FileInputStream ExcelFile=new FileInputStream(excelPath);
 		excelBook=new XSSFWorkbook(ExcelFile);

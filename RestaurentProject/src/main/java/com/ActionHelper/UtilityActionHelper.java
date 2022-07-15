@@ -1,6 +1,7 @@
 package com.ActionHelper;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -10,7 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class UtilityActionHelper {
 	Actions act;
@@ -135,5 +138,17 @@ public class UtilityActionHelper {
 		return driver.findElement(By.xpath(element)).getText();
 	}
 
+	public void waitUntilElementVisible(WebDriver driver, String xpath)
+	{
+		try
+		{
+			WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(30));
+			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
 
 }

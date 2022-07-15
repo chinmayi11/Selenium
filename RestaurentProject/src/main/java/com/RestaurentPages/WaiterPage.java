@@ -2,12 +2,10 @@ package com.RestaurentPages;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import com.ActionHelper.SendKeysActionHelper;
 import com.ActionHelper.UtilityActionHelper;
@@ -66,14 +64,7 @@ public class WaiterPage {
 	WebElement deleteConfirmationButton;
 	@FindBy (xpath="//a[@class='btn btn-default']//i[@class='fa fa-pencil'][1]")
 	WebElement editButton;
-	/*@FindBy(xpath="//table[@id='Table']/tbody/tr")
-	List<WebElement> rowElements;
-	@FindBy(xpath="//table[@id='Table']/tbody/tr/td")
-	List<WebElement> columnElements;
-	int rowCount=rowElements.size();
-	int columnCount=columnElements.size();*/
-	
-	 @FindBy (xpath="//span[contains(.,'Customers')]")
+	@FindBy (xpath="//span[contains(.,'Customers')]")
 	 WebElement navigateToCustomerPage;
 	
 	//Method to search users
@@ -82,7 +73,6 @@ public class WaiterPage {
 		
 		send=new SendKeysActionHelper();
 		send.clearAndsendkeys(driver, searchBar, name);
-		
 		
 		
 	}
@@ -97,22 +87,20 @@ public class WaiterPage {
 
 	public void typeWaiterName(String nameOfWaiter)
 	{
-		send.clearAndsendkeys(driver, inWaiterName, nameOfWaiter);
-		//inWaiterName.clear();
-		//inWaiterName.sendKeys(nameOfWaiter);
+	      inWaiterName.clear();
+		inWaiterName.sendKeys(nameOfWaiter);
 		
 	}
 	public void typePhone(String phn)
 	{
-		send.clearAndsendkeys(driver, inWaiterPhone, phn);
-		//inWaiterPhone.clear();
-		//inWaiterPhone.sendKeys(phn);
+		inWaiterPhone.clear();
+		inWaiterPhone.sendKeys(phn);
 	}
 	public void typeEmail(String mail)
 	{
-		send.clearAndsendkeys(driver, inWaiterEmail, mail);
-		//inWaiterEmail.clear();
-		//inWaiterEmail.sendKeys(mail);
+		inWaiterEmail.clear();
+	inWaiterEmail.sendKeys(mail);
+		
 	}
     public void selectStoreID(String storeId) throws Exception
     {
@@ -121,18 +109,18 @@ public class WaiterPage {
     }
     public void clickSubmitButton()
     {
-    	//submitButton.click();
-    	clicker.click(driver, submitButton);
+ 
+    	submitButton.click();
+    	
     }
 	  
     /** Methods for delete**/
     
     public void clickDeleteButton()
     {
-    	//deleteButton.click();
-    	//deleteConfirmationButton.click();
-    	clicker.click(driver, deleteButton);
-    	clicker.click(driver, deleteConfirmationButton);
+    	deleteButton.click();
+    	deleteConfirmationButton.click();
+    	
     }
     
     /**Method for edit**/

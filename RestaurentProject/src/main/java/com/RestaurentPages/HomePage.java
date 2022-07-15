@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.ActionHelper.ValidationActionHelpers;
+import com.ActionHelper.clickActionHelper;
 
 public class HomePage {
 	public HomePage(WebDriver driver)
@@ -15,6 +16,7 @@ public class HomePage {
 	}
 	WebDriver driver;
 	ValidationActionHelpers validation;
+	clickActionHelper clicker;
 	
 	@FindBy (xpath="//span[contains(.,'admin Doe') ]")
 	WebElement adminName;
@@ -46,8 +48,17 @@ public class HomePage {
 	WebElement suppliers;
 	@FindBy (xpath="//span[contains(.,'Customers')]")
 	 WebElement navigateToCustomerPage;
+	@FindBy (xpath="//h1[contains(.,' Choose a store')]")
+	WebElement chooseStoreHeader;
+	@FindBy (xpath="//ul[@id='storeline']//div[@class='info']//span[text()='Le_CAFE'][1]")
+	WebElement storeTitle;
 	
 	
+	public void clickPeople()
+	{
+		clicker=new clickActionHelper();
+		clicker.click(driver, people);
+	}
 	
 	public void selectWaiters()
 	{
@@ -74,14 +85,17 @@ public class HomePage {
 	
 	public Boolean  isWaitersDisplayed() throws Exception
 	{
+		validation =new ValidationActionHelpers();
 		return validation.isElementVisible(driver, waiters);
 	}
 	public Boolean  isCustomersDisplayed() throws Exception
 	{
+		validation =new ValidationActionHelpers();
 		return validation.isElementVisible(driver, customers);
 	}
 	public Boolean  isSuppliersDisplayed() throws Exception
 	{
+		validation =new ValidationActionHelpers();
 		return validation.isElementVisible(driver, suppliers);
 	}
 	
@@ -92,40 +106,59 @@ public class HomePage {
 	}
 	public Boolean isadminPhotoDisplayed() throws Exception
 	{
+		validation =new ValidationActionHelpers();
 		return validation.isElementVisible(driver, adminPhoto);
 	} 
 	public Boolean isPosDisplayed() throws Exception
 	{
+		validation =new ValidationActionHelpers();
 		return validation.isElementVisible(driver, pos);
 	} 
 	public Boolean isProductDisplayed() throws Exception
 	{
+		validation =new ValidationActionHelpers();
 		return validation.isElementVisible(driver, product);
 	}
 	public Boolean isStoreDisplayed() throws Exception
 	{
+		validation =new ValidationActionHelpers();
 		return validation.isElementVisible(driver, store);
 	} 
 	public Boolean isPeopleDisplayed() throws Exception
 	{
+		validation =new ValidationActionHelpers();
 		return validation.isElementVisible(driver, people);
 	} 
 	public Boolean isSaleDisplayed() throws Exception
 	{
+		validation =new ValidationActionHelpers();
 		return validation.isElementVisible(driver, sales);
 	} 
 	public Boolean isExpenseDisplayed() throws Exception
 	{
+		validation =new ValidationActionHelpers();
 		return validation.isElementVisible(driver, expenses);
 	} 
 	public Boolean isSettingsDisplayed() throws Exception
 	{
+		validation =new ValidationActionHelpers();
 		return validation.isElementVisible(driver, settings);
 	} 
 	public Boolean isReportsDisplayed() throws Exception
 	{
+		validation =new ValidationActionHelpers();
 		return validation.isElementVisible(driver, reports);
 	} 
+	public Boolean isChooseStoreHeaderDisplayed() throws Exception
+	{
+		validation =new ValidationActionHelpers();
+		return validation.isElementVisible(driver, chooseStoreHeader);
+	}
+	public Boolean isStoreTitleDisplayed() throws Exception
+	{
+		validation =new ValidationActionHelpers();
+		return validation.isElementVisible(driver, storeTitle);
+	}
 	
 	public WaiterPage waiterLogin()
 	{

@@ -3,12 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.RestaurentTests.WaiterTest">
+      <class name="com.RestaurentTests.LoginTest">
         <methods>
-          <include name="validateEditUserDetails"/>
+          <include name="quitBrowser"/>
           <include name="setup"/>
+          <include name="validLogin"/>
         </methods>
-      </class> <!-- com.RestaurentTests.WaiterTest -->
+      </class> <!-- com.RestaurentTests.LoginTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

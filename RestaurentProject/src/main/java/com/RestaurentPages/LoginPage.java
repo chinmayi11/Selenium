@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 import com.ActionHelper.SendKeysActionHelper;
+import com.ActionHelper.UtilityActionHelper;
 import com.DataHandlers.PropertyDataHandler;
 
 
@@ -28,6 +29,9 @@ public class LoginPage {
 		PageFactory.initElements(driver, this);
 		
 	}
+	
+	UtilityActionHelper utility;
+
 	WebDriver driver;
 	@FindBy (xpath="//input[@placeholder='Username']")
 	WebElement username;
@@ -45,18 +49,25 @@ public class LoginPage {
 	}
 	public void typeUsername() throws IOException
 	{
-		
+		utility=new UtilityActionHelper();
+		utility.waitUntilElementVisible(driver, "//input[@placeholder='Username']");
+
 		inputData=new SendKeysActionHelper();
+		
 		inputData.clearAndsendkeys(driver, username, uname);
 	}
 	public void typePassword() throws IOException
 	{
+		utility=new UtilityActionHelper();
+		utility.waitUntilElementVisible(driver, "//input[@placeholder='Password']");
 		inputData=new SendKeysActionHelper();
 		inputData.clearAndsendkeys(driver, password, pswd);
 		
 	}
 	public void clickLoginButton()
 	{
+		utility=new UtilityActionHelper();
+		utility.waitUntilElementVisible(driver, "//input[@name='submit']");
 		loginButton.click();
 	}
 	

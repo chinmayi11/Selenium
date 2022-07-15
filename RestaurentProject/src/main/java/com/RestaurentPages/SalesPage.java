@@ -5,7 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
+import com.ActionHelper.SendKeysActionHelper;
 import com.ActionHelper.UtilityActionHelper;
 import com.ActionHelper.ValidationActionHelpers;
 import com.ActionHelper.clickActionHelper;
@@ -25,7 +27,7 @@ public class SalesPage {
 	
 	@FindBy (xpath="//h3[contains(.,'Sales')]")
 	WebElement salesHeader;
-	@FindBy (xpath="//label[contains(.,'Search')]")
+	@FindBy (xpath="//input[@type='search']")
 	WebElement searchLabel;
 	@FindBy (xpath="//table[@id='table']//tr//th[1]")
 	WebElement tableHeaderNumber;
@@ -45,10 +47,8 @@ public class SalesPage {
 	WebElement tableHeaderStatus;
 	@FindBy (xpath="//table[@id='table']//tr//th[9]")
 	WebElement tableHeaderAction;
-	
 	@FindBy (xpath="//a[contains(.,'Action')]")
-			WebElement saleActionButton;
-	
+	WebElement saleActionButton;
 	@FindBy (xpath="//a[contains(.,'Edit')]")
 	WebElement saleEdit;
 	@FindBy (xpath="//a[contains(.,' Payements')]")
@@ -57,125 +57,205 @@ public class SalesPage {
 	WebElement invoice;
 	@FindBy (xpath="//a[contains(.,' Receipt')]")
 	WebElement receipt;
-	@FindBy (xpath="//button[contains(.,'Submit') and @class='btn btn-add hiddenpr']")
+	@FindBy (xpath="//div[@id='editModal']//div[@class='modal-footer']//button[@type='button' and contains(.,'Submit')]")
 	WebElement SaleEditSubmitButton;
-	
-	@FindBy (id="customerSelect")
-			WebElement changeClientDropdown;
-	@FindBy (id="changeStatus")
-			WebElement changeStatusDropdown;
-	
+	/*@FindBy (id="//select[@id='customerSelect']")
+	WebElement changeClientDropdown;
+	@FindBy (id="//select[@id='changeStatus']")
+	WebElement changeStatusDropdown;*/
+	@FindBy (xpath="//div[@id='invoice']//div[@id='invoiceModal']//div[@class='modal-content']//div[@class='modal-header']//button[contains(.,'×')]")
+	WebElement closeButton;
+	@FindBy (xpath="//div[@id='invoice']//div[@id='invoiceModal']//div[@class='modal-content']//div[@class='modal-footer']//button[text()='PDF']")
+	WebElement pDFButton;
+	@FindBy (xpath="//div[@id='invoice']//div[@id='invoiceModal']//div[@class='modal-content']//div[@class='modal-footer']//button[text()='print']")
+	WebElement printButton;
+	SendKeysActionHelper send;
+	public @FindBy (xpath="//table[@id='table']//tbody//tr//td[2]")
+	WebElement searchTableCustomerName;
+	@FindBy (xpath="//div[@id='payements']//div[@id='modal-body']//div[@id='payementsSection']//h4//b[text()='Total']")
+	WebElement totalLabel;
+	@FindBy (xpath="//div[@id='payements']//div[@id='modal-body']//button[contains(.,'Add Payement')]")
+	WebElement addPaymentButton;
+	@FindBy (xpath="//div[@id='payements']//div//button[contains(.,'Close')]")
+	WebElement paymentCloseButton;
+	@FindBy (css="select[id='customerSelect']")
+	WebElement changeClientDropDown;
+	@FindBy (css="select[id='changeStatus']")
+	WebElement changeStatusDropDown;
+	@FindBy (xpath="//div[@id='editModal']//div[@class='modal-footer']//button[@type='button' and contains(.,'Close')]")
+	WebElement editCloseButton;
 	
 	//Method to click on Action
+	public void searchCustomer(String name) throws Exception
+	{
+		
+		send=new SendKeysActionHelper();
+		send.clearAndsendkeys(driver, searchLabel, name);
+		
+	}
+	
 	
 	public void clickActionButton()
 	{
-		clicker=new clickActionHelper();
-		clicker.click(driver, saleActionButton);
+		
+		saleActionButton.click();;
 		
 	}
 	public void clickSalesEdit()
 	{
-		clicker.click(driver, saleEdit);
+		saleEdit.click();;
+	}
+	public void clickCloseButton()
+	{
+		closeButton.click();
+	}
+	public void clickEditCloseButton()
+	{
+		editCloseButton.click();
 	}
 
+	public void clickPayment()
+	{
+		payment.click();
+	}
 	public void selectClient(String clientName) throws Exception
 	{
-		util=new UtilityActionHelper();
-		util.selectDropDownByVisibleText(changeClientDropdown, clientName);
+		Select dropDown = new Select(changeClientDropDown);
+		dropDown.selectByVisibleText(clientName);
 	}
 	public void selectStatus(String paymentStatus) throws Exception
 	{
-		util.selectDropDownByVisibleText(changeStatusDropdown, paymentStatus);
+		Select dropDown1 = new Select(changeStatusDropDown);
+		dropDown1.selectByVisibleText(paymentStatus);
 	}
 	public void clickSaleEditSubmitButton()
 	{
-		clicker.click(driver, SaleEditSubmitButton);
+		SaleEditSubmitButton.click();
 	}
+	public void clickInvoice()
+	{
+		invoice.click();
+	}
+	public void clickPrintButton()
+	{
+		printButton.click();
+	}
+	public void clickPaymentCloseButton()
+	{
+		paymentCloseButton.click();
+	}
+	
+	
+	
 	//methods to check validation of elements//
 	
 	public Boolean isChangeClientDropDownEnabled() throws Exception
 	{
-		return validation.isElementEnabled(driver, changeClientDropdown);
+		
+		return changeClientDropDown.isEnabled();
 	}
 	public Boolean isChangeStatusDropDownEnabled() throws Exception
 	{
-		return validation.isElementEnabled(driver, changeStatusDropdown);
+		return changeStatusDropDown.isEnabled();
 	}
 	public Boolean isEditSubmitButtonEnabled() throws Exception
 	{
-		return validation.isElementEnabled(driver, SaleEditSubmitButton);
+		return SaleEditSubmitButton.isEnabled();
 	}
 	public Boolean isSalesHeaderDisplayed() throws Exception
 	{
-		validation=new ValidationActionHelpers();
-		return validation.isElementVisible(driver, salesHeader);
+		
+		return salesHeader.isDisplayed();
 	}
 	public Boolean isSearchLabelDisplayed() throws Exception
 	{
-		return validation.isElementVisible(driver, searchLabel);
+		return searchLabel.isDisplayed();
 	}
 	public Boolean istableHeaderNumberDisplayed() throws Exception
 	{
-		return validation.isElementVisible(driver, tableHeaderNumber);
+		return tableHeaderNumber.isDisplayed();
 	}
 	public Boolean istableHeaderCustomerDisplayed() throws Exception
 	{
-		return validation.isElementVisible(driver, tableHeaderCustomer);
+		return tableHeaderCustomer.isDisplayed();
 	}
 	public Boolean istableHeaderTaxDisplayed() throws Exception
 	{
-		return validation.isElementVisible(driver, tableHeaderTax);
+		return tableHeaderTax.isDisplayed();
 	}
 	public Boolean istableHeaderDiscountDisplayed() throws Exception
 	{
-		return validation.isElementVisible(driver, tableHeaderDiscount);
+		return tableHeaderDiscount.isDisplayed();
 	}
 	public Boolean istableHeaderTotalDisplayed() throws Exception
 	{
-		return validation.isElementVisible(driver, tableHeaderTotal);
+		return tableHeaderTotal.isDisplayed();
 	}
 	public Boolean istableHeaderCreatedByDisplayed() throws Exception
 	{
-		return validation.isElementVisible(driver, tableHeaderCreatedBy);
+		return tableHeaderCreatedBy.isDisplayed();
 	}
 	public Boolean istableHeaderTotalItemsDisplayed() throws Exception
 	{
-		return validation.isElementVisible(driver, tableHeaderTotalItems);
+		return tableHeaderTotalItems.isDisplayed();
 	}
 	public Boolean istableHeaderStatusDisplayed() throws Exception
 	{
-		return validation.isElementVisible(driver, tableHeaderStatus);
+		return tableHeaderStatus.isDisplayed();
 	}
 	public Boolean istableHeaderActionDisplayed() throws Exception
 	{
-		return validation.isElementVisible(driver, tableHeaderAction);
+		return tableHeaderAction.isDisplayed();
 	}
 	
 	public Boolean isSaleActionButtonEnabled() throws Exception
 	{
-		return validation.isElementEnabled(driver, saleActionButton);
+		return saleActionButton.isEnabled();
 	}
 	public Boolean isEditOptionEnabled() throws Exception
 	{
-		return validation.isElementEnabled(driver, saleEdit);
+		return saleEdit.isEnabled();
 	}
 	
 	public Boolean isInvoiceOptionEnabled() throws Exception
 	{
-		return validation.isElementEnabled(driver, invoice);
+		return invoice.isEnabled();
 	}
 	public Boolean isPaymentOptionEnabled() throws Exception
 	{
-		return validation.isElementEnabled(driver, payment);
+		return payment.isEnabled();
 	}
 	
 	public Boolean isReceiptOptionEnabled() throws Exception
 	{
-		return validation.isElementEnabled(driver, receipt);
+		return receipt.isEnabled();
 	}
 	
+	public Boolean isCloseButtonEnabled()
+	{
+		return closeButton.isEnabled();
+	}
 	
+	public Boolean isPDFButtonEnabled()
+	{
+		return pDFButton.isEnabled();
+	}
+	public Boolean isPaymentButtonEnabled()
+	{
+		return payment.isEnabled();   
+	}
+	public Boolean isTotalLabelDisplayed()
+	{
+		return totalLabel.isDisplayed();
+	}
+	public Boolean isClosePaymentButtonEnabled()
+	{
+		return paymentCloseButton.isEnabled();
+	}
+	public Boolean isEditCloseButtonEnabled()
+	{
+		return editCloseButton.isEnabled();
+	}
 	
 	
 

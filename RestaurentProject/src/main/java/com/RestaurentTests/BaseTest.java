@@ -1,12 +1,10 @@
 package com.RestaurentTests;
 
-import java.io.IOException;
+import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.openqa.selenium.edge.EdgeDriver;
 
 import com.ActionHelper.WebActionHelper;
 import com.Constants.AutomationConstants;
@@ -32,14 +30,15 @@ public class BaseTest {
 		
 	}
 	
-	public WebDriver launchFirefoxBrowser()
+	public WebDriver launchEdgeBrowser()
 	{
 		try {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\chinm\\OneDrive\\Desktop\\driver\\geckodriver.exe");
-		driver=new FirefoxDriver();
+		System.setProperty("webdriver.edge.driver", "C:\\Users\\chinm\\OneDrive\\Desktop\\driver\\msedgedriver.exe");
+		driver=new EdgeDriver();
 		driver.manage().window().maximize();
 		WebActionHelper wb=new WebActionHelper();
-		wb.launchUrl(driver,"chrome");
+		wb.launchUrl(driver,"edge");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		if(driver==null)
 		{
 			System.out.println("***************launch browser");
@@ -63,8 +62,8 @@ public class BaseTest {
 		case "chrome" :
 			launchChromeBrowser();
 			break;
-		case "firefox":
-			launchFirefoxBrowser();
+		case "edge": 
+			launchEdgeBrowser();
 			break;
 
 		default:
@@ -75,6 +74,10 @@ public class BaseTest {
 			
 	}
 	
+	public static WebDriver getDriver()
+	{
+		return driver;
+	}
 	
 
 }

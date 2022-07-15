@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.DataHandlers.PropertyDataHandler;
 
@@ -25,6 +26,7 @@ public class WebActionHelper {
 		 Properties pro= prop.readPropertiesFile("config.properties");
 		 String url=pro.getProperty("url");
 		 driver.get(url);
+		 
 		
 	}
 		catch(Exception e)
